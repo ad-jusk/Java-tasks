@@ -7,10 +7,16 @@ public class Main{
             System.out.println("Wrong number of parameters!");
             return;
         }
-        double a = Double.parseDouble(args[0]);
-        double b = Double.parseDouble(args[1]);
-        double c = Double.parseDouble(args[2]);
-
+        double a, b, c;
+        try{
+            a = Double.parseDouble(args[0]);
+            b = Double.parseDouble(args[1]);
+            c = Double.parseDouble(args[2]);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Failed to parse arguments!");
+            return;
+        }
         Equation eq = new Equation(a, b, c);
         if(eq.roots_exist() == false){
             System.out.println("Equation cannot be solved");

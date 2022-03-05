@@ -7,8 +7,16 @@ public class Main{
             return;
         }
         String word = args[0];
-        int a = Integer.parseInt(args[1]);
-        int b = Integer.parseInt(args[2]);
+        int a = 0;
+        int b = 0;
+        try{
+            a = Integer.parseInt(args[1]);
+            b = Integer.parseInt(args[2]);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Failed to parse arguments!");
+            return;
+        }
         if(a > b){
             System.out.println("Second index must be greater than first!");
             return;
