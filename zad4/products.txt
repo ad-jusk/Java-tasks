@@ -1,0 +1,16 @@
+Spozywcze
+-pomidor
+-ogorek
+-szynka
+-chleb
+-ser
+
+Chemia
+-mydlo
+-szampon
+-plyn do naczyn
+
+Motoryzacja
+-odswiezacz
+-plyn do spryskiwaczy
+-olej
