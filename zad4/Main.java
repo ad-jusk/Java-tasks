@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -6,30 +7,40 @@ public class Main{
     public static void main(String[] args){
         
         List AvailableProducts = new List();
-        if(AvailableProducts.FillList("products.txt") == 1){
+        try{
+            AvailableProducts.FillList("products.txt");
+        }
+        catch(IOException e){
             System.out.println("Blad odczytu dostepntch produktow z pliku!");
+            return;
         }
 
         List UserList = new List();
         String product;
-        int op;
+        int op = 0;
         Scanner scanner = new Scanner(System.in);
+        
 
         if(new File("moja_lista.txt").exists()){
             System.out.println("Czy chcesz wczytac ostatnio utworzona liste? (1 - tak, 0 - nie)");
             try{
                 op = scanner.nextInt();
                 scanner.nextLine();
-                if(op == 1){
-                    UserList.FillList("moja_lista.txt");
-                }
             }
             catch(InputMismatchException e){
                 System.out.println("Zla wartosc, robie pusta liste");
                 scanner.nextLine();
             }
         }
-        
+
+        if(op == 1){
+            try{
+                UserList.FillList("moja_lista.txt");
+            }
+            catch(IOException e){
+                System.out.println("Nie udalo sie wczytac listy z pliku");
+            }
+        }
 
         while(true){
             System.out.println("Co chcesz zrobic?");
@@ -78,7 +89,10 @@ public class Main{
                     UserList.PrintList();
                     break;
                 case 5:
-                    if(UserList.WriteListToFile("moja_lista.txt") == 1){
+                    try{
+                        UserList.WriteListToFile("moja_lista.txt");
+                    }
+                    catch(IOException e){
                         System.out.println("Blad zapisu do pliku");
                         break;
                     }

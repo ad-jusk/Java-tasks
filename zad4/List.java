@@ -12,44 +12,30 @@ public class List{
         this.AllProducts = new ArrayList<Category>();
         this.NumOfCategories = -1;
     }
-    int FillList(String filename){
-        BufferedReader reader;
-        try{
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
-            while(line != null){
-                if(line.length() > 0 && line.charAt(0) == '-'){
-                    AllProducts.get(NumOfCategories).add(line.substring(1,line.length()));
-                }
-                else if(line.length() > 0 && Character.isUpperCase(line.charAt(0))){
-                    AllProducts.add(new Category(line));
-                    this.NumOfCategories++;
-                }
-                line = reader.readLine();
+    void FillList(String filename) throws IOException{
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        String line = reader.readLine();
+        while(line != null){
+            if(line.length() > 0 && line.charAt(0) == '-'){
+                AllProducts.get(NumOfCategories).add(line.substring(1,line.length()));
             }
-            reader.close();
+            else if(line.length() > 0 && Character.isUpperCase(line.charAt(0))){
+                AllProducts.add(new Category(line));
+                this.NumOfCategories++;
+            }
+            line = reader.readLine();
         }
-        catch(IOException e){
-            return 1;
-        }
-        return 0;
+        reader.close();
     }
-    int WriteListToFile(String filename){
-        FileWriter writer;
-        try{
-            writer = new FileWriter(filename);
-            for(int i = 0;i<this.AllProducts.size();i++){
-                writer.write(this.AllProducts.get(i).GetCategoryName() + "\n");
-                for(int j = 0;j<this.AllProducts.get(i).GetProductsQuantity();j++){
-                    writer.write("-" + this.AllProducts.get(i).GetIndividualProduct(j) + "\n");
-                }
+    void WriteListToFile(String filename) throws IOException{
+        FileWriter writer = new FileWriter(filename);
+        for(int i = 0;i<this.AllProducts.size();i++){
+            writer.write(this.AllProducts.get(i).GetCategoryName() + "\n");
+            for(int j = 0;j<this.AllProducts.get(i).GetProductsQuantity();j++){
+                writer.write("-" + this.AllProducts.get(i).GetIndividualProduct(j) + "\n");
             }
-            writer.close();
         }
-        catch(IOException e){
-            return 1;
-        }
-        return 0;
+        writer.close();
     }
     void PrintList(){
         if(this.AllProducts.size() == 0){
@@ -92,5 +78,6 @@ public class List{
     }
     void ClearList(){
         AllProducts.clear();
+        this.NumOfCategories = -1;
     }
 }
