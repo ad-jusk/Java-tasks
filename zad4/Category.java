@@ -12,8 +12,8 @@ public class Category{
     void add(String product){
         this.Products.add(product);
     }
-    void remove(String product){
-        this.Products.remove(product);
+    boolean remove(String product){
+        return this.Products.remove(product);
     }
     void printCategory(){
         System.out.println(CategoryName + ":");

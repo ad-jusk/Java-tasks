@@ -68,7 +68,10 @@ public class List{
     }
     void RemoveProduct(String product){
         for(int i = 0;i<this.AllProducts.size();i++){
-            this.AllProducts.get(i).remove(product);
+            if(!this.AllProducts.get(i).remove(product) && i == this.AllProducts.size() - 1){
+                System.out.println("Nie udalo sie usunac produktu");
+                return;
+            }
             if(this.AllProducts.get(i).GetProductsQuantity() == 0){
                 this.AllProducts.remove(this.AllProducts.get(i));
                 this.NumOfCategories--;

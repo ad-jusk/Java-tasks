@@ -10,7 +10,7 @@ public class Main{
         vector1.FillVector(scanner);
         System.out.println("Podaj ciag liczb do wektora 2 (odzielony spacjami):");
         vector2.FillVector(scanner);
-
+        
         Vector result;
         try{
             result = vector1.AddVector(vector2);

@@ -1,5 +1,5 @@
 
-public class NrTelefoniczny{
+public class NrTelefoniczny implements Comparable<NrTelefoniczny>{
     String nrKierunkowy;
     String nrTelefoniczny;
     String nazwaUlicy;
@@ -11,4 +11,12 @@ public class NrTelefoniczny{
     void printAddress(){
         System.out.println("+" + this.nrKierunkowy + " " + this.nrTelefoniczny + ", " + this.nazwaUlicy);
     }
+    public int compareTo(NrTelefoniczny nr){
+        if(this.nazwaUlicy.equals(nr.nazwaUlicy)){
+            return 0;
+        }
+        return 1;
+    }
+    String getNumber() {return this.nrTelefoniczny;}
+    String getStreet() {return this.nazwaUlicy;}
 }

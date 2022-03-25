@@ -13,4 +13,8 @@ public class Osoba extends Wpis{
         System.out.print(this.imie + " " + this.nazwisko + ", ");
         this.adres.printAddress();
     }
+    @Override
+    String getNumber() {return adres.getNumber();}
+    @Override
+    String getStreet() {return this.adres.getStreet();}
 }
