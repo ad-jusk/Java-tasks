@@ -7,12 +7,14 @@ public class Main{
     public static void main(String[] args) {
         Osoba o1 = new Osoba("Jan","Kowalski","48","123456789","Sezamkowa");
         Osoba o2 = new Osoba("Jakub","Nowak","48","555666777","Piotrkowska");
+        Osoba o3 = new Osoba("Marek","Iksinski","48","666666666","Sezamkowa");
         Firma f1 = new Firma("Amazon", "50", "111222333", "Kwiatowa");
         Firma f2 = new Firma("Facebook", "52", "442111222", "Kwiatowa");
 
         TreeMap<String, Wpis> map = new TreeMap<String, Wpis>();
         map.put(o1.getNumber(),o1);
         map.put(o2.getNumber(),o2);
+        map.put(o3.getNumber(),o3);
         map.put(f1.getNumber(),f1);
         map.put(f2.getNumber(),f2);
         
