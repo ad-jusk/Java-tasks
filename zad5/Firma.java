@@ -9,10 +9,8 @@ public class Firma extends Wpis{
     @Override
     void opis(){
         System.out.print(this.nazwaFirmy + ", ");
-        adres.printAddress();
+        this.adres.printAddress();
     }
     @Override
-    String getNumber() {return this.adres.getNumber();}
-    @Override
-    String getStreet() {return this.adres.getStreet();}
+    NrTelefoniczny getAddress() {return this.adres;}
 }

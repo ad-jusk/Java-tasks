@@ -14,7 +14,5 @@ public class Osoba extends Wpis{
         this.adres.printAddress();
     }
     @Override
-    String getNumber() {return adres.getNumber();}
-    @Override
-    String getStreet() {return this.adres.getStreet();}
+    NrTelefoniczny getAddress() {return this.adres;}
 }

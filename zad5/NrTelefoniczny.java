@@ -12,11 +12,15 @@ public class NrTelefoniczny implements Comparable<NrTelefoniczny>{
         System.out.println("+" + this.nrKierunkowy + " " + this.nrTelefoniczny + ", " + this.nazwaUlicy);
     }
     public int compareTo(NrTelefoniczny nr){
-        if(this.nazwaUlicy.equals(nr.nazwaUlicy)){
+        if(this.nrTelefoniczny == nr.getNumber() && this.nrKierunkowy == nr.getKier() && this.nazwaUlicy == nr.getStreet()){
             return 0;
         }
-        return 1;
+        else if(Long.parseLong(this.nrTelefoniczny) > Long.parseLong(nr.getNumber())){
+            return 1;
+        }
+        return -1;
     }
     String getNumber() {return this.nrTelefoniczny;}
     String getStreet() {return this.nazwaUlicy;}
+    String getKier() {return this.nrKierunkowy;}
 }
