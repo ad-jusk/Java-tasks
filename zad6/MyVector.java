@@ -3,10 +3,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Vector{
+public class MyVector{
     ArrayList<Integer> vector;
 
-    Vector(){
+    MyVector(){
         this.vector = new ArrayList<Integer>();
     }
     void FillVector(Scanner scanner){
@@ -38,17 +38,17 @@ public class Vector{
         System.out.print("\nZapisywane wyniku do pliku...\n");
         this.SaveVector();
     }
-    boolean CheckIfSameLength(Vector v){
+    boolean CheckIfSameLength(MyVector v){
         if(this.vector.size() != v.GetVectorSize()){
             return false;
         }
         return true;
     }
-    Vector AddVector(Vector v) throws WektoryRoznejDlugosci{
+    MyVector AddVector(MyVector v) throws WektoryRoznejDlugosci{
         if(this.CheckIfSameLength(v) == false){
             throw new WektoryRoznejDlugosci(this.vector.size(), v.GetVectorSize());
         }
-        Vector result = new Vector();
+        MyVector result = new MyVector();
         for(int i = 0;i<this.vector.size();i++){
             result.vector.add(this.vector.get(i) + v.GetVectorElement(i));
         }

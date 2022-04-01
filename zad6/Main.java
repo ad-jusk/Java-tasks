@@ -4,10 +4,10 @@ import java.util.Scanner;
 public class Main{
     public static void main(String[] args) {
         
-        Vector vector1 = new Vector();
-        Vector vector2 = new Vector();
+        MyVector vector1 = new MyVector();
+        MyVector vector2 = new MyVector();
         Scanner scanner = new Scanner(System.in);
-        Vector result;
+        MyVector result;
         
         while(true){
             System.out.println("Podaj ciag liczb do wektora 1 (odzielony spacjami):");

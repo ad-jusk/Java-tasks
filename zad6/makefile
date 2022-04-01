@@ -1,6 +1,6 @@
 all: Main.class
 
-Main.class: Main.java Vector.java WektoryRoznejDlugosci.java
+Main.class: Main.java MyVector.java WektoryRoznejDlugosci.java
 	javac $^
 clean:
 	rm ./*.class 
