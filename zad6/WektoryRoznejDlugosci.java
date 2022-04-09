@@ -4,4 +4,5 @@ public class WektoryRoznejDlugosci extends Exception{
         System.out.println("Wektory maja rozne dlugosci!");
         System.out.println("Dlugosc pierwszego wektora to " + size1 + ", a drugiego to " + size2);
     }
+
 }

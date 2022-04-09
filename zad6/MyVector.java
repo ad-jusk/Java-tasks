@@ -1,10 +1,11 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MyVector{
-    ArrayList<Integer> vector;
+    private ArrayList<Integer> vector;
 
     MyVector(){
         this.vector = new ArrayList<Integer>();
@@ -16,7 +17,7 @@ public class MyVector{
             System.out.println("Zly wektor!");
             input = scanner.nextLine();
         }
-        String[] nums = input.split(" ");
+        String[] nums = this.prepareVector(input);
         for(String s : nums){
             temp = Integer.parseInt(s);       
             this.vector.add(temp);
@@ -39,10 +40,19 @@ public class MyVector{
         this.SaveVector();
     }
     boolean CheckIfSameLength(MyVector v){
-        if(this.vector.size() != v.GetVectorSize()){
-            return false;
+        return this.vector.size() == v.GetVectorSize();
+    }
+    String[] prepareVector(String input){
+        String[] inputDivided = input.split(" ");
+        ArrayList<String> inputDividedAsArray = new ArrayList<String>(Arrays.asList(inputDivided));
+        //This loop removes empty strings when user types more than 1 space
+        for(String string : inputDivided){
+            if(string.isEmpty()){
+                inputDividedAsArray.remove(string);
+            }
         }
-        return true;
+        inputDivided = inputDividedAsArray.toArray(new String[0]);
+        return inputDivided;
     }
     MyVector AddVector(MyVector v) throws WektoryRoznejDlugosci{
         if(this.CheckIfSameLength(v) == false){
