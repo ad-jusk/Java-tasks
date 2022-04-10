@@ -1,29 +1,36 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Scanner;
 
 public class Server {
     private static final int PORT = 9090;
-    private static ExecutorService numberOfThreads = Executors.newFixedThreadPool(5);
-    private static ArrayList<ClientThread> clients = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         
+
         ServerSocket listener = new ServerSocket(PORT);
+        ListenerRunnable listenerRunnable = new ListenerRunnable(listener);
+        
+        System.out.println("Press 'q' to shut down server");
+
+        Thread listenerThread = new Thread(listenerRunnable);
+        listenerThread.start();
+
+        Scanner scanner = new Scanner(System.in);
         
         while(true){
-            System.out.println("Waiting for client...");
-            Socket client = listener.accept();
-            System.out.println("Client is in!");
-            ClientThread clientThread = new ClientThread(client);
-            clients.add(clientThread);
-            numberOfThreads.execute(clientThread);
+            String x = scanner.nextLine();
+            if(x.equals("q")){
+                break;
+            }
+            else{
+                System.out.println("Wrong command! Press 'q' to shut down server");
+            }
         }
+        System.out.println("Shutting down server...");
+        listenerRunnable.stop();
+        scanner.close();
+        listener.close();
+        return;
     }
 }

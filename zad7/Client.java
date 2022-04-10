@@ -10,6 +10,7 @@ public class Client {
     private static final int PORT = 9090;
     
     public static void main(String[] args) throws IOException {
+        System.out.println("Waiting for connection...");
         Socket socket = new Socket(IP, PORT);
 
         BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -23,6 +24,7 @@ public class Client {
             System.out.println("Enter message:");
             message = inputKeyboard.readLine();
             if(message.equals("q")){
+                out.println(message);
                 break;
             }
             System.out.println("Enter time:");
@@ -50,6 +52,9 @@ public class Client {
             time = Integer.parseInt(reader.readLine());
         }
         catch(Exception e){
+            throw new WrongInputException();
+        }
+        if(time <= 0){
             throw new WrongInputException();
         }
         return time;
