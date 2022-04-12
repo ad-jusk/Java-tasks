@@ -7,8 +7,8 @@ public class ListenerRunnable implements Runnable{
     private boolean exit;
     public static int numberOfClients;
 
-    public ListenerRunnable(ServerSocket serverSocket){
-        this.listener = serverSocket;
+    public ListenerRunnable(int port) throws IOException{
+        this.listener = new ServerSocket(port);
         this.exit = false;
         numberOfClients = 1;
     }
@@ -21,7 +21,8 @@ public class ListenerRunnable implements Runnable{
             System.out.println("Waiting for client " + numberOfClients + "...");
             try {
                 client = listener.accept();
-            } catch (IOException e) {
+            } 
+            catch (IOException e) {
                 if(this.exit){
                     return;
                 }
@@ -40,10 +41,12 @@ public class ListenerRunnable implements Runnable{
             
             Thread clientThread = new Thread(clientRunnable);
             clientThread.start();
+        
         }
     }
-    public void stop(){
+    public void stop() throws IOException{
         this.exit = true;
+        this.listener.close();
     }
     
 }

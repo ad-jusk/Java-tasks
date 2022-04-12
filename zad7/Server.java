@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.util.Scanner;
 
 public class Server {
@@ -7,9 +6,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         
-
-        ServerSocket listener = new ServerSocket(PORT);
-        ListenerRunnable listenerRunnable = new ListenerRunnable(listener);
+        ListenerRunnable listenerRunnable = new ListenerRunnable(PORT);
         
         System.out.println("Press 'q' to shut down server");
 
@@ -30,7 +27,6 @@ public class Server {
         System.out.println("Shutting down server...");
         listenerRunnable.stop();
         scanner.close();
-        listener.close();
         return;
     }
 }

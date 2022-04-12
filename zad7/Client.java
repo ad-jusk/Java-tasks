@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class Client {
@@ -10,8 +11,25 @@ public class Client {
     private static final int PORT = 9090;
     
     public static void main(String[] args) throws IOException {
-        System.out.println("Waiting for connection...");
-        Socket socket = new Socket(IP, PORT);
+        Socket socket = null;
+        boolean scanning = true;
+
+        while(scanning){
+            try{
+                socket = new Socket(IP, PORT);
+                scanning = false;
+            }
+            catch(ConnectException e){
+                System.out.println("Can't connect to server. Waiting...");
+                try {
+                    Thread.sleep(2000);
+                } 
+                catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        System.out.println("Connected to server!");
 
         BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         BufferedReader inputKeyboard = new BufferedReader(new InputStreamReader(System.in));

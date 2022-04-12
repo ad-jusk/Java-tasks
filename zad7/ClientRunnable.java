@@ -12,6 +12,7 @@ public class ClientRunnable implements Runnable{
     private String clientMessage;
     private int clientTime;
     private int clientIndex;
+    //private boolean exit;
 
     public ClientRunnable(Socket socket, int index) throws IOException{
         this.client = socket;
@@ -38,18 +39,20 @@ public class ClientRunnable implements Runnable{
                 }
             }
             catch(IOException e){
-                System.err.println("IOexception in ClientThhread!");
+                System.err.println("IOexception in Client " + this.clientIndex + " Thread!");
             } 
             catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            this.out.close();
-            try {
-                this.in.close();
-                this.client.close();
-            } 
-            catch (IOException e) {
-                e.printStackTrace();
+            finally{
+                this.out.close();
+                try {
+                    this.in.close();
+                    this.client.close();
+                } 
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
