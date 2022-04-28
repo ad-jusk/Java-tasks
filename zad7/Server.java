@@ -1,5 +1,5 @@
-import java.io.IOException;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Server {
     private static final int PORT = 9090;

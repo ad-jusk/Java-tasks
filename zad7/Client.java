@@ -42,7 +42,6 @@ public class Client {
             System.out.println("Enter message:");
             message = inputKeyboard.readLine();
             if(message.equals("q")){
-                out.println(message);
                 break;
             }
             System.out.println("Enter time:");
@@ -56,6 +55,10 @@ public class Client {
             out.println(time);
 
             String response = input.readLine();
+            if(response == null){
+                System.out.println("No response, maybe server is down?");
+                break;
+            }
             System.out.println(response);
         }
         socket.close();

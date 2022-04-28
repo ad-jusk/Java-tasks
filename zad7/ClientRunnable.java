@@ -12,7 +12,6 @@ public class ClientRunnable implements Runnable{
     private String clientMessage;
     private int clientTime;
     private int clientIndex;
-    //private boolean exit;
 
     public ClientRunnable(Socket socket, int index) throws IOException{
         this.client = socket;
@@ -26,20 +25,19 @@ public class ClientRunnable implements Runnable{
         synchronized(this){
             try{
                 while(true){
-                    this.clientMessage = in.readLine();
+                    clientMessage = in.readLine();
                     if(this.clientMessage.equals("q")){
                         System.out.println("Client " + this.clientIndex + " is out!");
                         ListenerRunnable.numberOfClients--;
-                        System.out.println("Waiting for client " + ListenerRunnable.numberOfClients + "...");
                         break;
                     }
-                    this.clientTime = Integer.parseInt(in.readLine());
-                    wait(this.clientTime * 1000);
+                    clientTime = Integer.parseInt(in.readLine());
+                    wait(clientTime * 1000);
                     out.println(this.clientMessage);   
                 }
             }
             catch(IOException e){
-                System.err.println("IOexception in Client " + this.clientIndex + " Thread!");
+                return;
             } 
             catch (InterruptedException e) {
                 e.printStackTrace();
@@ -55,6 +53,9 @@ public class ClientRunnable implements Runnable{
                 }
             }
         }
+    }
+    public Socket getClient() {
+        return client;
     }
 
     
