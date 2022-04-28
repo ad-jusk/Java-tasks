@@ -2,11 +2,11 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class Server {
-    private static final int PORT = 9090;
+    public static final int PORT = 9090;
 
     public static void main(String[] args) throws IOException {
         
-        ListenerRunnable listenerRunnable = new ListenerRunnable(PORT);
+        ListenerRunnable listenerRunnable = new ListenerRunnable();
         
         System.out.println("Press 'q' to shut down server");
 

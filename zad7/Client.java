@@ -8,25 +8,19 @@ import java.net.Socket;
 public class Client {
 
     private static final String IP = "127.0.0.1";
-    private static final int PORT = 9090;
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Socket socket = null;
         boolean scanning = true;
 
         while(scanning){
             try{
-                socket = new Socket(IP, PORT);
+                socket = new Socket(IP, Server.PORT);
                 scanning = false;
             }
             catch(ConnectException e){
                 System.out.println("Can't connect to server. Waiting...");
-                try {
-                    Thread.sleep(2000);
-                } 
-                catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
+                Thread.sleep(2000);
             }
         }
         System.out.println("Connected to server!");
@@ -39,9 +33,10 @@ public class Client {
         int time = 0;
 
         while(true){
-            System.out.println("Enter message:");
+            System.out.println("Enter message (q to quit):");
             message = inputKeyboard.readLine();
             if(message.equals("q")){
+                out.println(message);
                 break;
             }
             System.out.println("Enter time:");

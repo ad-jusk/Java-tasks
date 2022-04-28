@@ -14,10 +14,10 @@ public class ClientRunnable implements Runnable{
     private int clientIndex;
 
     public ClientRunnable(Socket socket, int index) throws IOException{
-        this.client = socket;
-        this.in = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
-        this.out = new PrintWriter(this.client.getOutputStream(), true);
-        this.clientIndex = index;
+        client = socket;
+        in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        out = new PrintWriter(client.getOutputStream(), true);
+        clientIndex = index;
     }
 
     @Override
@@ -26,27 +26,30 @@ public class ClientRunnable implements Runnable{
             try{
                 while(true){
                     clientMessage = in.readLine();
-                    if(this.clientMessage.equals("q")){
-                        System.out.println("Client " + this.clientIndex + " is out!");
+                    if(clientMessage.equals("q")){
+                        System.out.println("Client " + clientIndex + " is out!");
                         ListenerRunnable.numberOfClients--;
                         break;
                     }
                     clientTime = Integer.parseInt(in.readLine());
                     wait(clientTime * 1000);
-                    out.println(this.clientMessage);   
+                    out.println(clientMessage);   
                 }
             }
             catch(IOException e){
-                return;
+                if(ListenerRunnable.exit){
+                    return;
+                }
+                e.printStackTrace();
             } 
             catch (InterruptedException e) {
                 e.printStackTrace();
             }
             finally{
-                this.out.close();
+                out.close();
                 try {
-                    this.in.close();
-                    this.client.close();
+                    in.close();
+                    client.close();
                 } 
                 catch (IOException e) {
                     e.printStackTrace();

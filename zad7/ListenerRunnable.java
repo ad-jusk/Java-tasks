@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class ListenerRunnable implements Runnable{
     private ServerSocket listener;
-    private boolean exit;
+    public static boolean exit;
     public static int numberOfClients;
     private ArrayList<ClientRunnable> clients;
 
-    public ListenerRunnable(int port) throws IOException{
-        listener = new ServerSocket(port);
+    public ListenerRunnable() throws IOException{
+        listener = new ServerSocket(Server.PORT);
         exit = false;
-        numberOfClients = 1;
+        numberOfClients = 1; //Also is a client index
         clients = new ArrayList<>();
     }
 
@@ -47,10 +47,10 @@ public class ListenerRunnable implements Runnable{
         }
     }
     public void stop() throws IOException{
+        exit = true;
         for(ClientRunnable c : clients){
             c.getClient().close();
         }
-        exit = true;
         listener.close();
     }
     
