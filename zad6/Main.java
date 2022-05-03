@@ -11,19 +11,19 @@ public class Main{
         
         while(true){
             System.out.println("Podaj ciag liczb do wektora 1 (odzielony spacjami):");
-            vector1.FillVector(scanner);
+            vector1.fillVector(scanner);
             System.out.println("Podaj ciag liczb do wektora 2 (odzielony spacjami):");
-            vector2.FillVector(scanner);
+            vector2.fillVector(scanner);
             try{
-                result = vector1.AddVector(vector2);
+                result = vector1.addVector(vector2);
             }
             catch(WektoryRoznejDlugosci e){
-                vector1.ClearVector();
-                vector2.ClearVector();
+                vector1.clearVector();
+                vector2.clearVector();
                 continue;
             }
             try{
-                result.PrintVector();
+                result.printVector();
             }
             catch(IOException e){
                 System.out.println("Nie udalo sie zapisac do pliku!");

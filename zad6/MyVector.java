@@ -7,23 +7,25 @@ import java.util.Scanner;
 public class MyVector{
     private ArrayList<Integer> vector;
 
-    MyVector(){
+    public MyVector(){
         this.vector = new ArrayList<Integer>();
     }
-    void FillVector(Scanner scanner){
+
+    public void fillVector(Scanner scanner){
         int temp = 0;
         String input = scanner.nextLine();
-        while(!this.checkIfVectorIsCorrect(input)){
+        while(!checkIfVectorIsCorrect(input)){
             System.out.println("Zly wektor!");
             input = scanner.nextLine();
         }
-        String[] nums = this.prepareVector(input);
+        String[] nums = prepareVector(input);
         for(String s : nums){
             temp = Integer.parseInt(s);       
-            this.vector.add(temp);
+            vector.add(temp);
         }
     }
-    boolean checkIfVectorIsCorrect(String input){
+
+    public boolean checkIfVectorIsCorrect(String input){
         for(int i = 0;i<input.length();i++){
             if(!Character.isDigit(input.charAt(i)) && input.charAt(i) != ' '){
                 return false;
@@ -31,20 +33,24 @@ public class MyVector{
         }
         return true;
     }
-    void PrintVector() throws IOException{
+
+    public void printVector() throws IOException{
         System.out.println("Wynik:");
-        for(Integer value : this.vector){
+        for(Integer value : vector){
             System.out.print(value + " ");
         }
         System.out.print("\nZapisywane wyniku do pliku...\n");
-        this.SaveVector();
+        saveVector();
     }
-    boolean CheckIfSameLength(MyVector v){
-        return this.vector.size() == v.GetVectorSize();
+
+    public boolean checkIfSameLength(MyVector v){
+        return vector.size() == v.getVectorSize();
     }
-    String[] prepareVector(String input){
+
+    public String[] prepareVector(String input){
         String[] inputDivided = input.split(" ");
         ArrayList<String> inputDividedAsArray = new ArrayList<String>(Arrays.asList(inputDivided));
+
         //This loop removes empty strings when user types more than 1 space
         for(String string : inputDivided){
             if(string.isEmpty()){
@@ -54,24 +60,27 @@ public class MyVector{
         inputDivided = inputDividedAsArray.toArray(new String[0]);
         return inputDivided;
     }
-    MyVector AddVector(MyVector v) throws WektoryRoznejDlugosci{
-        if(this.CheckIfSameLength(v) == false){
-            throw new WektoryRoznejDlugosci(this.vector.size(), v.GetVectorSize());
+
+    public MyVector addVector(MyVector v) throws WektoryRoznejDlugosci{
+        if(checkIfSameLength(v) == false){
+            throw new WektoryRoznejDlugosci(vector.size(), v.getVectorSize());
         }
         MyVector result = new MyVector();
-        for(int i = 0;i<this.vector.size();i++){
-            result.vector.add(this.vector.get(i) + v.GetVectorElement(i));
+        for(int i = 0;i<vector.size();i++){
+            result.vector.add(vector.get(i) + v.getVectorElement(i));
         }
         return result;
     }
-    void SaveVector() throws IOException{
+
+    public void saveVector() throws IOException{
         FileWriter writer = new FileWriter("result.txt");
-        for(Integer number : this.vector){
+        for(Integer number : vector){
             writer.write(number.toString() + " ");
         }
         writer.close();
     }
-    void ClearVector(){this.vector.clear();}
-    int GetVectorElement(int index) {return this.vector.get(index);}
-    int GetVectorSize() {return this.vector.size();} 
+
+    public void clearVector() {vector.clear();}
+    public int getVectorElement(int index) {return vector.get(index);}
+    public int getVectorSize() {return vector.size();} 
 }
