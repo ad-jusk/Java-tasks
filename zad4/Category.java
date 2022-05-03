@@ -2,34 +2,35 @@ import java.util.ArrayList;
 
 public class Category{
 
-    String CategoryName;
-    ArrayList<String> Products;
+    private String categoryName;
+    private ArrayList<String> products;
 
-    Category(String name){
-        this.CategoryName = name;
-        this.Products = new ArrayList<String>();
+    public Category(String name){
+        categoryName = name;
+        products = new ArrayList<String>();
     }
-    void add(String product){
-        this.Products.add(product);
+    public void add(String product){
+        products.add(product);
     }
-    boolean remove(String product){
-        return this.Products.remove(product);
+    public boolean remove(String product){
+        return products.remove(product);
     }
-    void printCategory(){
-        System.out.println(CategoryName + ":");
-        for (String string : Products) {
+    public void printCategory(){
+        System.out.println(categoryName + ":");
+        for (String string : products) {
             System.out.println("- " + string);
         }
     }
-    boolean IsProductAvailable(String name){
-        for(String product : Products){
+    public boolean isProductAvailable(String name){
+        for(String product : products){
             if(name.equals(product)){
                 return true;
             }
         }
         return false;
     }
-    String GetCategoryName() {return this.CategoryName;}
-    int GetProductsQuantity() {return Products.size();}
-    String GetIndividualProduct(int index) {return this.Products.get(index);}
+
+    public String getCategoryName() {return categoryName;}
+    public int getProductsQuantity() {return products.size();}
+    public String getIndividualProduct(int index) {return products.get(index);}
 }

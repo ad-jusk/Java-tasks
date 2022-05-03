@@ -1,29 +1,30 @@
 
 public class Equation{
-    double a;
-    double b;
-    double c;
-    double delta;
-    Equation(double A, double B, double C){
-        this.a = A;
-        this.b = B;
-        this.c = C;
-        this.delta = B*B - (4*A*C);
+    private double a;
+    private double b;
+    private double c;
+    private double delta;
+
+    public Equation(double A, double B, double C){
+        a = A;
+        b = B;
+        c = C;
+        delta = B*B - (4*A*C);
     }
-    boolean roots_exist(){
-        if(this.delta < 0){
+    public boolean roots_exist(){
+        if(delta < 0){
             return false;
         }
         return true;
     }
-    void solve(){
-        if(this.delta == 0){
-            double x1 = -this.b/(2*this.a);
+    public void solve(){
+        if(delta == 0){
+            double x1 = -b/(2*a);
             System.out.println("Root: " + x1);
         }
         else{
-            double x1 = (-this.b - Math.sqrt(this.delta))/(2*this.a);
-            double x2 = (-this.b + Math.sqrt(this.delta))/(2*this.a);
+            double x1 = (-b - Math.sqrt(delta))/(2*a);
+            double x2 = (-b + Math.sqrt(delta))/(2*a);
             System.out.print("Roots: " + x1 + ", " + x2 + "\n");
         }
     }

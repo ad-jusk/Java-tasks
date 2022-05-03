@@ -1,18 +1,21 @@
 
 public class Osoba extends Wpis{
-    String imie;
-    String nazwisko;
-    NrTelefoniczny adres;
-    Osoba(String im, String nazw, String kier, String tel, String ulica){
+    private String imie;
+    private String nazwisko;
+    private NrTelefoniczny adres;
+    
+    public Osoba(String im, String nazw, String kier, String tel, String ulica){
         this.imie = im;
         this.nazwisko = nazw;
         this.adres = new NrTelefoniczny(kier,tel,ulica);
     }
+
     @Override
-    void opis(){
-        System.out.print(this.imie + " " + this.nazwisko + ", ");
-        this.adres.printAddress();
+    public void opis(){
+        System.out.print(imie + " " + nazwisko + ", ");
+        adres.printAddress();
     }
+
     @Override
-    NrTelefoniczny getAddress() {return this.adres;}
+    public NrTelefoniczny getAddress() {return adres;}
 }

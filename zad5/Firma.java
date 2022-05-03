@@ -1,16 +1,17 @@
 
 public class Firma extends Wpis{
-    String nazwaFirmy;
-    NrTelefoniczny adres;
-    Firma(String nazwa, String kier, String tel, String ulica){
-        this.nazwaFirmy = nazwa;
-        this.adres = new NrTelefoniczny(kier, tel, ulica);
+    private String nazwaFirmy;
+    private NrTelefoniczny adres;
+
+    public Firma(String nazwa, String kier, String tel, String ulica){
+        nazwaFirmy = nazwa;
+        adres = new NrTelefoniczny(kier, tel, ulica);
     }
     @Override
-    void opis(){
-        System.out.print(this.nazwaFirmy + ", ");
-        this.adres.printAddress();
+    public void opis(){
+        System.out.print(nazwaFirmy + ", ");
+        adres.printAddress();
     }
     @Override
-    NrTelefoniczny getAddress() {return this.adres;}
+    public NrTelefoniczny getAddress() {return adres;}
 }

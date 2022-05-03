@@ -1,5 +1,5 @@
 
 public abstract class Wpis{
-    abstract void opis();
-    abstract NrTelefoniczny getAddress();
+    public abstract void opis();
+    public abstract NrTelefoniczny getAddress();
 }

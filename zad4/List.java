@@ -6,81 +6,88 @@ import java.util.ArrayList;
 
 public class List{
 
-    ArrayList<Category> AllProducts;
-    int NumOfCategories;
-    List(){
-        this.AllProducts = new ArrayList<Category>();
-        this.NumOfCategories = -1;
+    private ArrayList<Category> allProducts;
+    private int numOfCategories;
+
+    public List(){
+        allProducts = new ArrayList<Category>();
+        numOfCategories = -1;
     }
-    void FillList(String filename) throws IOException{
+
+    public void fillList(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line = reader.readLine();
         while(line != null){
             if(line.length() > 0 && line.charAt(0) == '-'){
-                AllProducts.get(NumOfCategories).add(line.substring(1,line.length()));
+                allProducts.get(numOfCategories).add(line.substring(1,line.length()));
             }
             else if(line.length() > 0 && Character.isUpperCase(line.charAt(0))){
-                AllProducts.add(new Category(line));
-                this.NumOfCategories++;
+                allProducts.add(new Category(line));
+                numOfCategories++;
             }
             line = reader.readLine();
         }
         reader.close();
     }
-    void WriteListToFile(String filename) throws IOException{
+
+    public void writeListToFile(String filename) throws IOException{
         FileWriter writer = new FileWriter(filename);
-        for(int i = 0;i<this.AllProducts.size();i++){
-            writer.write(this.AllProducts.get(i).GetCategoryName() + "\n");
-            for(int j = 0;j<this.AllProducts.get(i).GetProductsQuantity();j++){
-                writer.write("-" + this.AllProducts.get(i).GetIndividualProduct(j) + "\n");
+        for(int i = 0;i<allProducts.size();i++){
+            writer.write(allProducts.get(i).getCategoryName() + "\n");
+            for(int j = 0;j<allProducts.get(i).getProductsQuantity();j++){
+                writer.write("-" + allProducts.get(i).getIndividualProduct(j) + "\n");
             }
         }
         writer.close();
     }
-    void PrintList(){
-        if(this.AllProducts.size() == 0){
+
+    public void printList(){
+        if(allProducts.size() == 0){
             System.out.println("Lista jest pusta");
         }
         else{
-            for(Category c : this.AllProducts){
+            for(Category c : allProducts){
                 c.printCategory();
             }
         }
     }
-    boolean SearchForProduct(List list, String product){
-        for(Category c : list.AllProducts){
-            if(c.IsProductAvailable(product)){
+
+    public boolean searchForProduct(List list, String product){
+        for(Category c : list.allProducts){
+            if(c.isProductAvailable(product)){
                 int count = 0;
-                for(Category i : this.AllProducts){
-                    if(i.GetCategoryName().equals(c.GetCategoryName())){
-                        this.AllProducts.get(count).add(product);
+                for(Category i : allProducts){
+                    if(i.getCategoryName().equals(c.getCategoryName())){
+                        allProducts.get(count).add(product);
                         return true;
                     }
                     count++;
                 }
-                this.AllProducts.add(new Category(c.GetCategoryName()));
-                this.NumOfCategories++;
-                this.AllProducts.get(this.NumOfCategories).add(product);
+                allProducts.add(new Category(c.getCategoryName()));
+                numOfCategories++;
+                allProducts.get(numOfCategories).add(product);
                 return true;
             }
         }
         return false;
     }
-    void RemoveProduct(String product){
-        for(int i = 0;i<this.AllProducts.size();i++){
-            if(!this.AllProducts.get(i).remove(product) && i == this.AllProducts.size() - 1){
+
+    void removeProduct(String product){
+        for(int i = 0;i<allProducts.size();i++){
+            if(!allProducts.get(i).remove(product) && i == allProducts.size() - 1){
                 System.out.println("Nie udalo sie usunac produktu");
                 return;
             }
-            if(this.AllProducts.get(i).GetProductsQuantity() == 0){
-                this.AllProducts.remove(this.AllProducts.get(i));
-                this.NumOfCategories--;
+            if(allProducts.get(i).getProductsQuantity() == 0){
+                allProducts.remove(allProducts.get(i));
+                numOfCategories--;
                 break;
             }
         }
     }
-    void ClearList(){
-        AllProducts.clear();
-        this.NumOfCategories = -1;
+
+    public void clearList(){
+        allProducts.clear();
+        numOfCategories = -1;
     }
 }

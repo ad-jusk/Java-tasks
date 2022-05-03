@@ -6,16 +6,16 @@ import java.util.Scanner;
 public class Main{
     public static void main(String[] args){
         
-        List AvailableProducts = new List();
+        List availableProducts = new List();
         try{
-            AvailableProducts.FillList("products.txt");
+            availableProducts.fillList("products.txt");
         }
         catch(IOException e){
             System.out.println("Blad odczytu dostepntch produktow z pliku!");
             return;
         }
 
-        List UserList = new List();
+        List userList = new List();
         String product;
         int op = 0;
         Scanner scanner = new Scanner(System.in);
@@ -35,7 +35,7 @@ public class Main{
 
         if(op == 1){
             try{
-                UserList.FillList("moja_lista.txt");
+                userList.fillList("moja_lista.txt");
             }
             catch(IOException e){
                 System.out.println("Nie udalo sie wczytac listy z pliku");
@@ -67,7 +67,7 @@ public class Main{
                     while(true){
                         System.out.println("Podaj produkt:");
                         product = scanner.nextLine();
-                        if(UserList.SearchForProduct(AvailableProducts, product)){
+                        if(userList.searchForProduct(availableProducts, product)){
                             System.out.println("Dodano produkt do listy");
                             break;
                         }
@@ -79,18 +79,18 @@ public class Main{
                 case 2:
                     System.out.println("Podaj produkt do usuniecia:");
                     product = scanner.nextLine();
-                    UserList.RemoveProduct(product);
+                    userList.removeProduct(product);
                     break;
                 case 3:
-                    UserList.ClearList();
+                    userList.clearList();
                     System.out.println("Wyszyszczono liste");
                     break;
                 case 4:
-                    UserList.PrintList();
+                    userList.printList();
                     break;
                 case 5:
                     try{
-                        UserList.WriteListToFile("moja_lista.txt");
+                        userList.writeListToFile("moja_lista.txt");
                     }
                     catch(IOException e){
                         System.out.println("Blad zapisu do pliku");
