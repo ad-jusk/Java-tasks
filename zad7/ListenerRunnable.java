@@ -12,17 +12,18 @@ public class ListenerRunnable implements Runnable{
     public ListenerRunnable() throws IOException{
         listener = new ServerSocket(Server.PORT);
         exit = false;
-        numberOfClients = 1; //Also is a client index
+        numberOfClients = 0; //Also is a client index
         clients = new ArrayList<>();
     }
 
     @Override
     public void run(){
-        Socket client;
-        ClientRunnable clientRunnable;
+        Socket client = null;
+        ClientRunnable clientRunnable = null;
         while(true){
             try {
                 client = listener.accept();
+                numberOfClients++;
             } 
             catch (IOException e) {
                 if(exit){
@@ -39,7 +40,6 @@ public class ListenerRunnable implements Runnable{
                 continue;
             }
             System.out.println("Client " + numberOfClients + " is in!");
-            numberOfClients++;
             clients.add(clientRunnable);
             
             Thread clientThread = new Thread(clientRunnable);

@@ -14,7 +14,6 @@ public class Server {
         listenerThread.start();
 
         Scanner scanner = new Scanner(System.in);
-        
         while(true){
             String x = scanner.nextLine();
             if(x.equals("q")){
